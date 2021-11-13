@@ -1,4 +1,4 @@
-package cz.cs.restapi.calls.model;
+package cz.cs.restapi.call.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -12,7 +12,7 @@ public class AccountsFullRes {
     private Long pageSize;
     private Long recordCount;
     private Long nextPage;
-    private ArrayList<Accounts> accountsArrayList;
+    private ArrayList<Account> accounts;
 
     public AccountsFullRes() {
     }
@@ -57,12 +57,12 @@ public class AccountsFullRes {
         this.nextPage = nextPage;
     }
 
-    public ArrayList<Accounts> getAccountsArrayList() {
-        return accountsArrayList;
+    public ArrayList<Account> getAccounts() {
+            return accounts;
     }
 
-    public void setAccountsArrayList(ArrayList<Accounts> accountsArrayList) {
-        this.accountsArrayList = accountsArrayList;
+   public void setAccounts(ArrayList<Account> accounts) {
+        this.accounts = accounts;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class AccountsFullRes {
                 ", pageSize=" + pageSize +
                 ", recordCount=" + recordCount +
                 ", nextPage=" + nextPage +
-                ", accountsArrayList=" + accountsArrayList +
+                ", accountsArrayList=" + accounts +
                 '}';
     }
 }

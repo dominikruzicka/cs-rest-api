@@ -1,21 +1,34 @@
 package cz.cs.restapi.service;
 
-import cz.cs.restapi.calls.AccountsResource;
-import cz.cs.restapi.calls.model.AccountsFullRes;
+import cz.cs.restapi.call.AccountsResource;
+import cz.cs.restapi.call.model.Account;
+import cz.cs.restapi.dto.AccountDTO;
+import cz.cs.restapi.error.ErrorResponseCatalogue;
+import cz.cs.restapi.mapper.AccountMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountsService {
 
+    private final AccountMapper accountMapper;
+
+    public AccountsService(AccountMapper taskMapper) {
+        this.accountMapper = taskMapper;
+    }
+
     public ResponseEntity<Object> getAllAccountsList(){
         AccountsResource accountsResource = new AccountsResource();
-
-        System.out.println(accountsResource.getAccountsFullRes().toString());
-        //testing purpose:
-        String responseBody = "Testing getAccounts method";
-        return new ResponseEntity(responseBody, HttpStatus.OK);
+        List<Account> accounts = accountsResource.getAccountsList();
+         if (accounts != null) {
+             List<AccountDTO> accountDTOS = accountMapper.map(accounts);
+             return new ResponseEntity(accountDTOS, HttpStatus.OK);
+        } else{
+            return new ResponseEntity(ErrorResponseCatalogue.err1, HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

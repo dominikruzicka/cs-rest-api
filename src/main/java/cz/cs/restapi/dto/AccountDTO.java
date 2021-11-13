@@ -1,11 +1,11 @@
-package cz.cs.restapi.calls.model;
+package cz.cs.restapi.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.math.BigDecimal;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Accounts {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class AccountDTO {
 
     private String accountNumber;
     private String bankCode;
@@ -19,10 +19,6 @@ public class Accounts {
     private String description;
     private String note;
     private String iban;
-    //statements ignored
-
-    public Accounts() {
-    }
 
     public String getAccountNumber() {
         return accountNumber;
@@ -118,23 +114,5 @@ public class Accounts {
 
     public void setIban(String iban) {
         this.iban = iban;
-    }
-
-    @Override
-    public String toString() {
-        return "Accounts{" +
-                "accountNumber='" + accountNumber + '\'' +
-                ", bankCode='" + bankCode + '\'' +
-                ", transparencyFrom='" + transparencyFrom + '\'' +
-                ", transparencyTo='" + transparencyTo + '\'' +
-                ", publicationTo='" + publicationTo + '\'' +
-                ", actualizationDate='" + actualizationDate + '\'' +
-                ", balance=" + balance +
-                ", currency='" + currency + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", note='" + note + '\'' +
-                ", iban='" + iban + '\'' +
-                '}';
     }
 }
