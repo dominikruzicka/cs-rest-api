@@ -20,6 +20,7 @@ public class AccountsController {
     public ResponseEntity<Object> getAllAccountsList(){
         return accountsService.getAllAccountsList();
     }
+
 }
 
 
