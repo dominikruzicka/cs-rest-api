@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/senders")
 public class SendersController {
@@ -22,9 +20,7 @@ public class SendersController {
 
     @GetMapping("/getSendersList")
     public ResponseEntity<Object> getSendersList(@RequestBody AccountsListsDTO accountsLists){
-        int i = accountsLists.getAccountsRequired().size();
-        int j = accountsLists.getAccountsOptional().size();
-        return senderService.getSendersList();
+        return senderService.getSendersList(accountsLists);
     }
 
 }

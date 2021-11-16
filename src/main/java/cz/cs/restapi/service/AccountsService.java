@@ -15,15 +15,16 @@ import java.util.List;
 public class AccountsService {
 
     private final AccountMapper accountMapper;
+    private final AccountsResource accountsResource;
 
-    public AccountsService(AccountMapper taskMapper) {
+    public AccountsService(AccountMapper taskMapper, AccountsResource accountsResource) {
         this.accountMapper = taskMapper;
+        this.accountsResource = accountsResource;
     }
 
     public ResponseEntity<Object> getAllAccountsList(){
-        AccountsResource accountsResource = new AccountsResource();
         List<Account> accounts = accountsResource.getAccountsList();
-         if (accounts != null) {
+        if (accounts != null) {
              List<AccountDTO> accountDTOS = accountMapper.map(accounts);
              return new ResponseEntity(accountDTOS, HttpStatus.OK);
         } else{

@@ -1,22 +1,17 @@
 package cz.cs.restapi.call.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.ArrayList;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AccountsFullRes {
-
+public class TransactionsFullRes {
     private int pageNumber;
     private int pageCount;
     private int pageSize;
     private int recordCount;
     private int nextPage;
-    private ArrayList<Account> accounts;
-
-    public AccountsFullRes() {
-    }
+    private ArrayList<Transaction> transactions;
 
     public int getPageNumber() {
         return pageNumber;
@@ -58,23 +53,11 @@ public class AccountsFullRes {
         this.nextPage = nextPage;
     }
 
-    public ArrayList<Account> getAccounts() {
-            return accounts;
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
     }
 
-   public void setAccounts(ArrayList<Account> accounts) {
-        this.accounts = accounts;
-    }
-
-    @Override
-    public String toString() {
-        return "AccountsRes{" +
-                "pageNumber=" + pageNumber +
-                ", pageCount=" + pageCount +
-                ", pageSize=" + pageSize +
-                ", recordCount=" + recordCount +
-                ", nextPage=" + nextPage +
-                ", accountsArrayList=" + accounts +
-                '}';
+    public void setTransactions(ArrayList<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }
