@@ -6,9 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /*
@@ -57,7 +55,7 @@ public class AccountsResource {
         if (httpStatus.value() == 200){
             transactions = transactionsFullRes.getBody().getTransactions();
             int nextPage = transactionsFullRes.getBody().getNextPage();
-            while (nextPage != 0 || transactionsFullRes.getBody().getPageCount()-1 != transactionsFullRes.getBody().getPageNumber()) { //conditions are REDUNDANT, but are here to be sure program will not end in infinite loop in case nextPage datatype changes from int to Long, then it will not return 0 but NULL instead
+            while (nextPage != 0) {
                 transactionsFullRes = getTransactionsFullRes(accountNumber,nextPage);
                 if (transactionsFullRes.getStatusCode().value() == 200) {
                     transactions.addAll(transactionsFullRes.getBody().getTransactions());
