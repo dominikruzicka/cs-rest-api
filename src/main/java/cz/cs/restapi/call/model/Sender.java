@@ -11,6 +11,18 @@ public class Sender {
     private String name;
     private String description;
 
+    public Sender() {
+    }
+
+    public Sender(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public Sender(String accountNumber, String name) {
+        this.accountNumber = accountNumber;
+        this.name = name;
+    }
+
     public String getAccountNumber() {
         return accountNumber;
     }

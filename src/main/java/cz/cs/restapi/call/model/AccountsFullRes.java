@@ -18,6 +18,13 @@ public class AccountsFullRes {
     public AccountsFullRes() {
     }
 
+    public AccountsFullRes(int nextPage, ArrayList<Account> accounts) {
+        this.nextPage = nextPage;
+        this.accounts = accounts;
+    }
+
+
+
     public int getPageNumber() {
         return pageNumber;
     }

@@ -13,6 +13,13 @@ public class TransactionsFullRes {
     private int nextPage;
     private ArrayList<Transaction> transactions;
 
+    public TransactionsFullRes() {
+    }
+    public TransactionsFullRes(int pageNumber, ArrayList<Transaction> transactions) {
+        this.pageNumber = pageNumber;
+        this.transactions = transactions;
+    }
+
     public int getPageNumber() {
         return pageNumber;
     }

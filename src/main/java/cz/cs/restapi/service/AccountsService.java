@@ -1,10 +1,11 @@
 package cz.cs.restapi.service;
 
-import cz.cs.restapi.call.AccountsResource;
 import cz.cs.restapi.call.model.Account;
 import cz.cs.restapi.dto.AccountDTO;
 import cz.cs.restapi.error.ErrorResponseCatalogue;
 import cz.cs.restapi.mapper.AccountMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,15 +16,16 @@ import java.util.List;
 public class AccountsService {
 
     private final AccountMapper accountMapper;
-    private final AccountsResource accountsResource;
+    private final AccountsResourceService accountsResourceService;
 
-    public AccountsService(AccountMapper taskMapper, AccountsResource accountsResource) {
+    @Autowired
+    public AccountsService(AccountMapper taskMapper, AccountsResourceService accountsResourceService) {
         this.accountMapper = taskMapper;
-        this.accountsResource = accountsResource;
+        this.accountsResourceService = accountsResourceService;
     }
 
     public ResponseEntity<Object> getAllAccountsList(){
-        List<Account> accounts = accountsResource.getAccountsList();
+        List<Account> accounts = accountsResourceService.getAccountsList();
         if (accounts != null) {
              List<AccountDTO> accountDTOS = accountMapper.map(accounts);
              return new ResponseEntity(accountDTOS, HttpStatus.OK);

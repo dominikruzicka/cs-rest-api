@@ -26,6 +26,15 @@ public class Account {
     public Account() {
     }
 
+    public Account(String accountNumber){
+        this.accountNumber = accountNumber;
+    }
+
+    public Account(String accountNumber, String name) {
+        this.accountNumber = accountNumber;
+        this.name = name;
+    }
+
     public String getAccountNumber() {
         return accountNumber;
     }

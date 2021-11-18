@@ -11,6 +11,13 @@ public class Transaction {
     //reducing transaction only to Sender information
     private Sender sender;
 
+    public Transaction() {
+    }
+
+    public Transaction(Sender sender) {
+        this.sender = sender;
+    }
+
     public Sender getSender() {
         return sender;
     }

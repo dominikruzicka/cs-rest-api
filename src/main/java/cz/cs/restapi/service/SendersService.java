@@ -1,6 +1,5 @@
 package cz.cs.restapi.service;
 
-import cz.cs.restapi.call.AccountsResource;
 import cz.cs.restapi.dto.AccountsListsDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +13,10 @@ import java.util.stream.Collectors;
 @Service
 public class SendersService {
 
-    private final AccountsResource accountsResource;
+    private final AccountsResourceService accountsResourceService;
 
-    public SendersService(AccountsResource accountsResource){
-        this.accountsResource = accountsResource;
+    public SendersService(AccountsResourceService accountsResourceService){
+        this.accountsResourceService = accountsResourceService;
     }
 
     public ResponseEntity<Object> getSendersList(AccountsListsDTO accountsLists){
@@ -60,7 +59,7 @@ public class SendersService {
 
         for(int i = 0; i < requiredAccountsListNoDupl.size(); i++) {
             if(accountNumberOfSendersBase.isEmpty() & wasComparedMinOnceFlag == false) {
-                accountNumberOfSendersBase = accountsResource.getAccountNumberOfSenders(requiredAccountsListNoDupl.get(i));
+                accountNumberOfSendersBase = accountsResourceService.getAccountNumberOfSenders(requiredAccountsListNoDupl.get(i));
                 continue;
             }
             if(accountNumberOfSendersBase.isEmpty() & wasComparedMinOnceFlag == true){
@@ -69,7 +68,7 @@ public class SendersService {
             if(wasSwapped == true) { //in case of call of retainAll method on HashSets was swapped, I need to save xxxIncrement into xxxBase so I dont overwrite it when calling CS again
                 accountNumberOfSendersBase = accountNumberOfSendersIncrement;
             }
-            accountNumberOfSendersIncrement = accountsResource.getAccountNumberOfSenders(requiredAccountsListNoDupl.get(i));
+            accountNumberOfSendersIncrement = accountsResourceService.getAccountNumberOfSenders(requiredAccountsListNoDupl.get(i));
             if(accountNumberOfSendersBase.size() < accountNumberOfSendersIncrement.size()){
                 accountNumberOfSendersBase.retainAll(accountNumberOfSendersIncrement);
                 wasComparedMinOnceFlag = true;
@@ -87,7 +86,7 @@ public class SendersService {
         Set<String> accountNumberOfSendersTotal = new HashSet<>();
         Set<String> accountNumberOfSendersInOneCall;
         for(String account : optionalAccountsListNoDupl){
-            accountNumberOfSendersInOneCall = accountsResource.getAccountNumberOfSenders(account);
+            accountNumberOfSendersInOneCall = accountsResourceService.getAccountNumberOfSenders(account);
             accountNumberOfSendersTotal.addAll(accountNumberOfSendersInOneCall);
         }
         return accountNumberOfSendersTotal;
