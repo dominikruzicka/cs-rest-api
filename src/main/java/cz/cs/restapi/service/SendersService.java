@@ -69,7 +69,7 @@ public class SendersService {
                 accountNumberOfSendersBase = accountNumberOfSendersIncrement;
             }
             accountNumberOfSendersIncrement = accountsResourceService.getAccountNumberOfSenders(requiredAccountsListNoDupl.get(i));
-            if(accountNumberOfSendersBase.size() < accountNumberOfSendersIncrement.size()){
+            if(accountNumberOfSendersBase.size() <= accountNumberOfSendersIncrement.size()){
                 accountNumberOfSendersBase.retainAll(accountNumberOfSendersIncrement);
                 wasComparedMinOnceFlag = true;
                 wasSwapped = false;

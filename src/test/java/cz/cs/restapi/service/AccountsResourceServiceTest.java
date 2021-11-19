@@ -1,9 +1,7 @@
-package cz.cs.restapi.call;
+package cz.cs.restapi.service;
 
 import cz.cs.restapi.call.caller.AccountsCaller;
 import cz.cs.restapi.call.model.*;
-import cz.cs.restapi.service.AccountsResourceService;
-import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +28,8 @@ public class AccountsResourceServiceTest {
     @Test
     @DisplayName("Test should pass when getAccountsList() returns List of accounts matching predefined List of accounts")
     void getAccountsListTest(){
-        //prepare variables
+
+        //prepare mock reply for method getAccountsFullRes() used in getAccountsList()
         Account account1 = new Account("123");
         Account account2 = new Account("456");
         Account account3 = new Account("789");
@@ -38,7 +37,6 @@ public class AccountsResourceServiceTest {
         AccountsFullRes accountsFullRes = new AccountsFullRes(0, accounts);
         ResponseEntity<AccountsFullRes> resEntAccountsFullRes = new ResponseEntity(accountsFullRes, HttpStatus.OK);
 
-        //mock reply from method getAccountsFullRes() used in getAccountsList()
         doReturn(resEntAccountsFullRes).when(accountsCaller).getAccountsFullRes(0);
 
         //call tested method
@@ -52,7 +50,8 @@ public class AccountsResourceServiceTest {
     @Test
     @DisplayName("Test should pass when getAccountNumberOfSenders() returns correct account number of senders based on provided transparent account")
     void getAccountNumberOfSendersTest(){
-        //prepare variables
+
+        //prepare mock reply for method getAccountsFullRes() used in getAccountsList()
         Sender sender1 = new Sender("123");
         Transaction transaction1 = new Transaction(sender1);
         Sender sender2 = new Sender("456");
@@ -61,15 +60,15 @@ public class AccountsResourceServiceTest {
         TransactionsFullRes transactionsFullRes = new TransactionsFullRes(0, transactions);
         ResponseEntity<TransactionsFullRes> resEntTransactionsFullRes = new ResponseEntity(transactionsFullRes, HttpStatus.OK);
 
-        //mock reply from method getAccountsFullRes() used in getAccountsList()
         doReturn(resEntTransactionsFullRes).when(accountsCaller).getTransactionsFullRes("001", 0);
 
         //call tested method
-        Set<String> transactionsActual = accountsResourceService.getAccountNumberOfSenders("001");
+        Set<String> actualTransactions = accountsResourceService.getAccountNumberOfSenders("001");
 
-        Set<String> transactionsExpected = Set.of("123", "456");
+        //expected result
+        Set<String> expectedTransactions = Set.of("123", "456");
 
-        assertTrue(transactionsActual.size() == transactionsExpected.size() && transactionsActual.containsAll(transactionsExpected));
+        assertTrue(actualTransactions.size() == expectedTransactions.size() && actualTransactions.containsAll(expectedTransactions));
     }
 
 }
