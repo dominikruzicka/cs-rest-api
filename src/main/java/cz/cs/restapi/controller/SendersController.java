@@ -20,7 +20,7 @@ public class SendersController {
 
     @GetMapping("/getSendersList")
     public ResponseEntity<Object> getSendersList(@RequestBody AccountsListsDTO accountsLists){
-        return senderService.getSendersList(accountsLists);
+        return senderService.getSendersNamesList(accountsLists);
     }
 
 }

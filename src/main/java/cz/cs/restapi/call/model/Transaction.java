@@ -8,7 +8,7 @@ import java.util.ArrayList;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Transaction {
-    //reducing transaction only to Sender information
+    //reducing transaction only to Sender information for now
     private Sender sender;
 
     public Transaction() {

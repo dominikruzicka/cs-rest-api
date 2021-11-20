@@ -50,7 +50,7 @@ public class AccountsResourceService {
         }
     }
 
-    public HashSet<String> getAccountNumberOfSenders(String accountNumber){
+    public Map<String, String> getAccountsSendersMap(String accountNumber){
         ResponseEntity<TransactionsFullRes> transactionsFullRes = accountsCaller.getTransactionsFullRes(accountNumber, 0);
         HttpStatus httpStatus = transactionsFullRes.getStatusCode();
         List<Transaction> transactions;
@@ -64,18 +64,13 @@ public class AccountsResourceService {
                     nextPage = transactionsFullRes.getBody().getNextPage();
                 }
             }
-            HashSet<String> accountNumberOfSenders = transactions.stream()
-                                                                 .filter(Objects::nonNull)
-                                                                 .map(transaction -> transaction.getSender().getAccountNumber())
-                                                                 .collect(Collectors.toCollection(HashSet::new));
 
-            accountNumberOfSenders.remove(null);
-            /*
-            Map<String, String> a = transactions.stream()
-                                                .filter(Objects::nonNull)
-                                                .collect(Collectors.toMap(t -> t.getSender().getName(), v -> v.getSender().getAccountNumber()));
-            */
-            return accountNumberOfSenders;
+            Map<String, String> mapAccountsSenders = transactions.stream()
+                                                .filter(k -> k.getSender().getAccountNumber() != null && !k.getSender().getAccountNumber().isEmpty())
+                                                .filter(v -> v.getSender().getName() != null && !v.getSender().getName().isEmpty())
+                                                .collect(Collectors.toMap(k -> k.getSender().getAccountNumber(), v -> v.getSender().getName()));
+
+            return mapAccountsSenders;
         } else {
             return null;
         }

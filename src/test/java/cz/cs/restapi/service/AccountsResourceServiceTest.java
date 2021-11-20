@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.*;
 
+import static java.util.Map.entry;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doReturn;
 
@@ -48,13 +50,13 @@ public class AccountsResourceServiceTest {
     }
 
     @Test
-    @DisplayName("Test should pass when getAccountNumberOfSenders() returns correct account number of senders based on provided transparent account")
+    @DisplayName("Test should pass when getAccountNumberOfSenders() returns correct Map of account number of senders[K] and names[V] based on provided transparent account")
     void getAccountNumberOfSendersTest(){
 
         //prepare mock reply for method getAccountsFullRes() used in getAccountsList()
-        Sender sender1 = new Sender("123");
+        Sender sender1 = new Sender("123", "Jiri Kuzelka");
         Transaction transaction1 = new Transaction(sender1);
-        Sender sender2 = new Sender("456");
+        Sender sender2 = new Sender("456", "Jan Novak");
         Transaction transaction2 = new Transaction(sender2);
         ArrayList<Transaction> transactions =  new ArrayList<>(Arrays.asList(transaction1, transaction2));
         TransactionsFullRes transactionsFullRes = new TransactionsFullRes(0, transactions);
@@ -63,12 +65,23 @@ public class AccountsResourceServiceTest {
         doReturn(resEntTransactionsFullRes).when(accountsCaller).getTransactionsFullRes("001", 0);
 
         //call tested method
-        Set<String> actualTransactions = accountsResourceService.getAccountNumberOfSenders("001");
+        Map<String, String> actualMap = accountsResourceService.getAccountsSendersMap("001");
 
         //expected result
-        Set<String> expectedTransactions = Set.of("123", "456");
+        Map<String, String> expectedMap = Map.ofEntries(
+                entry("123", "Jiri Kuzelka"),
+                entry("456", "Jan Novak")
+        );
 
-        assertTrue(actualTransactions.size() == expectedTransactions.size() && actualTransactions.containsAll(expectedTransactions));
+        //false result
+        Map<String, String> falseResultMap = Map.ofEntries(
+                entry("456", "Alfonz Pletivo")
+        );
+
+        assertTrue(actualMap.size() == expectedMap.size() & actualMap.equals(expectedMap));
+        assertFalse(actualMap.size() == falseResultMap.size());
+        assertFalse(actualMap.equals(falseResultMap));
+
     }
 
 }
