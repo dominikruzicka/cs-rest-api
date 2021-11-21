@@ -33,7 +33,6 @@ public class AccountsResourceService {
         ResponseEntity<AccountsFullRes> accountsFullRes = accountsCaller.getAccountsFullRes(0);
         HttpStatus httpStatus = accountsFullRes.getStatusCode();
         List<Account> accounts;
-        //think better about this logic in general, so far handling null pointer in case there is error or no body sent back
         if (httpStatus.value() == 200) {
             accounts = accountsFullRes.getBody().getAccounts();
             int nextPage = accountsFullRes.getBody().getNextPage();

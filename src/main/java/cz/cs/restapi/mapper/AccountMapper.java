@@ -8,7 +8,5 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AccountMapper {
-   // AccountDTO accountToDTO(Account account);
-   // Account DTOtoAccount(AccountDTO accountDTO);
        List<AccountDTO> map(List<Account> accounts);
 }

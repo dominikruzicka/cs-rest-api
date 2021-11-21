@@ -19,8 +19,8 @@ public class AccountsService {
     private final AccountsResourceService accountsResourceService;
 
     @Autowired
-    public AccountsService(AccountMapper taskMapper, AccountsResourceService accountsResourceService) {
-        this.accountMapper = taskMapper;
+    public AccountsService(AccountMapper accountMapper, AccountsResourceService accountsResourceService) {
+        this.accountMapper = accountMapper;
         this.accountsResourceService = accountsResourceService;
     }
 
