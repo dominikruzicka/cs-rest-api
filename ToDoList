@@ -1,0 +1,3 @@
+- If I have time: Better error handling when calling and receiving responses from CS
+
+- If I have time: Search more on and maybe rewrite in AccountsResource call to CS API to java.net.http.* (https://www.youtube.com/watch?v=5MmlRZZxTqk)

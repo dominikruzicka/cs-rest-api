@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "240e72d7-7c7d-4ad1-a3a3-94ffa4b90539",
+		"name": "CS-REST-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Call to CS",
+			"item": [
+				{
+					"name": "getListOfAvailableTransparentAccounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "WEB-API-key",
+								"value": "92dbdb20-93cc-4b2f-91d0-d2ad51b9cd13",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://www.csas.cz/webapi/api/v3/transparentAccounts",
+							"protocol": "https",
+							"host": [
+								"www",
+								"csas",
+								"cz"
+							],
+							"path": [
+								"webapi",
+								"api",
+								"v3",
+								"transparentAccounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDetailOfSpecificTransparentAccount",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "WEB-API-key",
+								"value": "92dbdb20-93cc-4b2f-91d0-d2ad51b9cd13",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://www.csas.cz/webapi/api/v3/transparentAccounts/000000-3936173359",
+							"protocol": "https",
+							"host": [
+								"www",
+								"csas",
+								"cz"
+							],
+							"path": [
+								"webapi",
+								"api",
+								"v3",
+								"transparentAccounts",
+								"000000-3936173359"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getListOfTransactionsForSpecificTransparentAccount",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "WEB-API-key",
+								"value": "92dbdb20-93cc-4b2f-91d0-d2ad51b9cd13",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://www.csas.cz/webapi/api/v3/transparentAccounts/000000-2906478309/transactions",
+							"protocol": "https",
+							"host": [
+								"www",
+								"csas",
+								"cz"
+							],
+							"path": [
+								"webapi",
+								"api",
+								"v3",
+								"transparentAccounts",
+								"000000-2906478309",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Call to my app",
+			"item": [
+				{
+					"name": "getAllAccountsList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ENVIRONMENT_VAR}}/accounts/getAllAccountsList",
+							"host": [
+								"{{ENVIRONMENT_VAR}}"
+							],
+							"path": [
+								"accounts",
+								"getAllAccountsList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSendersList",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountsRequired\":[\"000027-2000709369\",\"000000-0388063349\",\"000000-3936173359\"],\r\n    \"accountsOptional\":[\"000000-3682094369\",\"000000-4007514379\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ENVIRONMENT_VAR}}/senders/getSendersList",
+							"host": [
+								"{{ENVIRONMENT_VAR}}"
+							],
+							"path": [
+								"senders",
+								"getSendersList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSendersList -> empty collections",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountsRequired\":[],\r\n    \"accountsOptional\":[]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ENVIRONMENT_VAR}}/senders/getSendersList",
+							"host": [
+								"{{ENVIRONMENT_VAR}}"
+							],
+							"path": [
+								"senders",
+								"getSendersList"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
