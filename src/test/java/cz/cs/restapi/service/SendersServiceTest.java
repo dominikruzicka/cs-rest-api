@@ -26,8 +26,8 @@ public class SendersServiceTest {
     }
 
     @Test
-    @DisplayName("Test should pass when correct Map of Accounts[K] and Senders[V] is returned")
-    void getAccountsSendersMapTest(){
+    @DisplayName("Test should pass when correct List of senders' names is returnes")
+    void getSendersNamesListTest(){
 
         //prepare input
         AccountsListsDTO accountsListsDTO = new AccountsListsDTO();

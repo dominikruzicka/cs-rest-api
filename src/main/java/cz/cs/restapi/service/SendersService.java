@@ -59,7 +59,7 @@ public class SendersService {
         Boolean wasSwapped = false; // The whole swapping logic is applied in order to make less iterations when comparing xxxBase and XXXIncrement
 
         for(int i = 0; i < requiredAccountsListNoDupl.size(); i++) {
-            if(accountsSendersBase.isEmpty() & wasComparedMinOnceFlag == false) {
+            if(accountsSendersBase.isEmpty() && wasComparedMinOnceFlag == false) {
                 accountsSendersBase = accountsResourceService.getAccountsSendersMap(requiredAccountsListNoDupl.get(i));
                 continue;
             }

@@ -33,7 +33,7 @@ public class AccountsResourceService {
         ResponseEntity<AccountsFullRes> accountsFullRes = accountsCaller.getAccountsFullRes(0);
         HttpStatus httpStatus = accountsFullRes.getStatusCode();
         List<Account> accounts;
-        if (httpStatus.value() == 200) {
+        if (httpStatus.value() == 200 && accountsFullRes.getBody() != null) {
             accounts = accountsFullRes.getBody().getAccounts();
             int nextPage = accountsFullRes.getBody().getNextPage();
             while (nextPage != 0){
